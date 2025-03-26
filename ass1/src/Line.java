@@ -207,12 +207,25 @@ public class Line {
         if (!isIntersecting(other)) {
             return null;
         }
+        // Handle two lines with infinite slope sitting on top of each other
+        if (Double.isInfinite(slope) && Double.isInfinite(other.getSlope())) {
+            return null;
+        }
         double finalSlope = slope - other.getSlope();
+
 
         // We already know that the lines intersect. if the final slope is 0,
         // that means the lines sit on top of each other, so we need to return null.
         if (finalSlope == 0) {
             return null;
+        }
+        // Handle case where slope is infinite
+        if (Double.isInfinite(finalSlope)) {
+            double x = start.getX();
+
+            // Y is the same for our entire line, so we need the y of the other line.
+            double y = other.getSlope() * x + other.getIntercept();
+            return new Point(x, y);
         }
         double finalIntercept = other.getIntercept() - intercept;
         double x = finalIntercept / finalSlope;
