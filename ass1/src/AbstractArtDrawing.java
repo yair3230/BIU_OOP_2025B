@@ -9,7 +9,6 @@ import java.awt.Color;
 
 /**
  * Draws 10 lines on a surface, shows their middles and intersections, highlights triangles.
- *
  */
 public class AbstractArtDrawing {
     /**
@@ -21,12 +20,15 @@ public class AbstractArtDrawing {
     static void drawLine(Line l, DrawSurface d) {
         d.drawLine((int) l.start().getX(), (int) l.start().getY(), (int) l.end().getX(), (int) l.end().getY());
         Point mid = l.middle();
+
+        // Mark the middle of the line.
         d.setColor(Color.blue);
-        d.fillCircle((int) mid.getX(), (int) mid.getY(), 5);
+        d.fillCircle((int) mid.getX(), (int) mid.getY(), 3);
         d.setColor(Color.black);
     }
 
     static void drawTriangleEdge(Point one, Point two, DrawSurface d) {
+        // Draw a green line to mark the edge of the triangle.
         d.setColor(Color.green);
         d.drawLine((int) one.getX(), (int) one.getY(), (int) two.getX(), (int) two.getY());
         d.setColor(Color.black);
@@ -37,12 +39,13 @@ public class AbstractArtDrawing {
             return;
         }
         d.setColor(Color.red);
-        d.fillCircle((int) p.getX(), (int) p.getY(), 5);
+        d.fillCircle((int) p.getX(), (int) p.getY(), 3);
         d.setColor(Color.black);
     }
 
     /**
      * Draws 10 lines on a surface, shows their middles and intersections, highlights triangles.
+     *
      * @param args Command line args
      */
     public static void main(String[] args) {
